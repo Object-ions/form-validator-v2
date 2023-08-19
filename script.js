@@ -6,12 +6,20 @@ const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
 //Check required field
-function checkRequiredField(input) {
-    if (username.value === '') {
-        showError(username, 'Username is required');
-    } else {
-        showSuccess(username);
-    }
+function checkRequiredField(inputArr) {
+    inputArr.forEach((input) => {
+        if (input.value.trim() === '') {
+            showError(input, `${input.id} is required`);
+        } else {
+            showSuccess(input);
+        }
+    });
+}
+
+//Check email format
+function checkEmailFormat(input) {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(input.value);
 }
 
 //Show error message
@@ -22,7 +30,7 @@ function showError(input, message) {
 }
 
 //Show success message
-function showSuccess(input, message) {
+function showSuccess(input) {
     const formControl = input.parentElement;
     formControl.className = 'form-control success';
 }
@@ -31,7 +39,7 @@ function showSuccess(input, message) {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    checkRequiredField();
+    checkRequiredField([username, email, password, password2]);
 });
 
 
