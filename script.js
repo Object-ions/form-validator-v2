@@ -10,16 +10,18 @@ const fieldsArr = [username, email, password, password2]
 function checkRequiredField(fieldsArr) {
     fieldsArr.forEach(field => {
         if (field.value === '') {
-            showError(field);
+            showError(field, `${field.id} is required`);
         } else {
             showSuccess(field);
         }
     });
 }
 
-function showError(field) {
+function showError(field, message) {
     const formControl = field.parentElement;
     formControl.className = 'form-control error';
+    const small = formControl.querySelector('small');
+    small.innerText = message;
 }
 
 function showSuccess(field) {
@@ -37,13 +39,3 @@ form.addEventListener('submit', (e) => {
     // checkInputLength(password, 6, 25);
     // checkEmailFormat(email);
 });
-
-
-//////////////////////////////
-//check required fields
-//show input error message
-//show success message
-//check email format
-//check passwords match
-//check length of input
-//get field name   
