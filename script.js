@@ -9,12 +9,13 @@ const password2 = document.getElementById('password2');
 function checkRequiredField(inputArr) {
     inputArr.forEach((input) => {
         if (input.value.trim() === '') {
-            showError(input, `${input.id} is required`);
+            showError(input);
         } else {
             showSuccess(input);
         }
     });
 }
+
 
 //Check email format
 function checkEmailFormat(input) {
@@ -23,10 +24,9 @@ function checkEmailFormat(input) {
 }
 
 //Show error message
-function showError(input, message) {
+function showError(input) {
     const formControl = input.parentElement;
     formControl.className = 'form-control error';
-    formControl.querySelector('small').innerText = message;
 }
 
 //Show success message
@@ -35,11 +35,24 @@ function showSuccess(input) {
     formControl.className = 'form-control success';
 }
 
+//Check input length
+function checkInputLength(input, min, max) {
+    if (input.value.length < min) {
+        const temp = input.document.querySelector('small').innerText = `${input} must be at least ${min} characters`;
+        console.log(temp);
+    } else if (input.value.length > max) {
+        input.document.querySelector('small').innerText = `${input} must be less than ${min} characters`;
+    } else{
+        showSuccess(input);
+    }
+}
+
 //Event listeners
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     checkRequiredField([username, email, password, password2]);
+    checkInputLength(username, 3, 15)
 });
 
 
