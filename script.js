@@ -7,6 +7,7 @@ const password2 = document.getElementById('password-2');
 
 const fieldsArr = [username, email, password, password2]
 
+//Check required fields
 function checkRequiredField(fieldsArr) {
     fieldsArr.forEach(field => {
         if (field.value.trim() === '') {
@@ -17,10 +18,12 @@ function checkRequiredField(fieldsArr) {
     });
 }
 
+//Get field name
 function getFieldName(field) {
     return field.id.charAt(0).toUpperCase() + field.id.slice(1);
 }
 
+//Show values in console
 function showLog() {
     console.log(username.value);
     console.log(email.value);
@@ -28,6 +31,7 @@ function showLog() {
     console.log(password2.value);
 }
 
+//Show error message
 function showError(field, message) {
     const formControl = field.parentElement;
     formControl.className = 'form-control error';
@@ -35,14 +39,31 @@ function showError(field, message) {
     small.innerText = message;
 }
 
+//Show success message
 function showSuccess(field) {
     const formControl = field.parentElement;
     formControl.className = 'form-control success';
     cleanField(field);
 }
 
+//Clean fields after submit
 function cleanField(field) {
     field.value = '';
+}
+
+//Check input length
+function checkInputLength(field, min, max) {
+    if (field.value.length < min) {
+        const message = `${getFieldName(field)} must be at least ${min} characters`;
+        console.log(message);
+        showError(field, message);
+    } else if (field.value.length > max) {
+        const message = `${getFieldName(field)} can't ecceed ${max} characters`;
+        console.log(message);
+        showError(field, message);
+    } else {
+        showSuccess(field);
+    }
 }
 
 //Event listeners
@@ -51,7 +72,7 @@ form.addEventListener('submit', (e) => {
 
     showLog();
     checkRequiredField(fieldsArr);
-    // checkInputLength(username, 3, 15);
+    checkInputLength(username, 3, 15);
     // checkPasswordMatch(password, password2);
     // checkInputLength(password, 6, 25);
     // checkEmailFormat(email);
