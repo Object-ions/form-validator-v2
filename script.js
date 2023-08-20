@@ -10,11 +10,21 @@ const fieldsArr = [username, email, password, password2]
 function checkRequiredField(fieldsArr) {
     fieldsArr.forEach(field => {
         if (field.value === '') {
-            showError(field, message);
+            showError(field);
         } else {
             showSuccess(field);
         }
     });
+}
+
+function showError(field) {
+    const formControl = field.parentElement;
+    formControl.className = 'form-control error';
+}
+
+function showSuccess(field) {
+    const formControl = field.parentElement;
+    formControl.className = 'form-control success';
 }
 
 //Event listeners
