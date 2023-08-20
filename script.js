@@ -21,6 +21,13 @@ function getFieldName(field) {
     return field.id.charAt(0).toUpperCase() + field.id.slice(1);
 }
 
+function showLog() {
+    console.log(username.value);
+    console.log(email.value);
+    console.log(password.value);
+    console.log(password2.value);
+}
+
 function showError(field, message) {
     const formControl = field.parentElement;
     formControl.className = 'form-control error';
@@ -31,12 +38,18 @@ function showError(field, message) {
 function showSuccess(field) {
     const formControl = field.parentElement;
     formControl.className = 'form-control success';
+    cleanField(field);
+}
+
+function cleanField(field) {
+    field.value = '';
 }
 
 //Event listeners
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    showLog();
     checkRequiredField(fieldsArr);
     // checkInputLength(username, 3, 15);
     // checkPasswordMatch(password, password2);
