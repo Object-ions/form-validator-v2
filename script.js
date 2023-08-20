@@ -9,12 +9,16 @@ const fieldsArr = [username, email, password, password2]
 
 function checkRequiredField(fieldsArr) {
     fieldsArr.forEach(field => {
-        if (field.value === '') {
-            showError(field, `${field.id} is required`);
+        if (field.value.trim() === '') {
+            showError(field, `${getFieldName(field)} is required`);
         } else {
             showSuccess(field);
         }
     });
+}
+
+function getFieldName(field) {
+    return field.id.charAt(0).toUpperCase() + field.id.slice(1);
 }
 
 function showError(field, message) {
