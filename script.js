@@ -53,16 +53,11 @@ function cleanField(field) {
 
 //Check input length
 function checkInputLength(field, min, max) {
-    if (field.value.length < min) {
-        const message = `${getFieldName(field)} must be at least ${min} characters`;
-        console.log(message);
-        showError(field, message);
-    } else if (field.value.length > max) {
-        const message = `${getFieldName(field)} can't ecceed ${max} characters`;
-        console.log(message);
+    if (field.value.length < min || field.value.length > max) {
+        message = `${getFieldName(field)} must be between ${min} and ${max} characters long`;
         showError(field, message);
     } else {
-        showSuccess(field);
+        showSuccess();
     }
 }
 
