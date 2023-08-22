@@ -85,9 +85,10 @@ function allFieldsAreSuccessful(fieldsArr) {
 //Show success popup
 function showPopupSuccess() {
     const popup = document.getElementById('popup');
-    popup.style.display = 'block';
+    popup.classList.add('show');
+
     setTimeout(() => {
-        popup.style.display = 'none';
+        popup.classList.remove('show');
     }, 3000);
 }
 
