@@ -23,14 +23,6 @@ function getFieldName(field) {
     return field.id.charAt(0).toUpperCase() + field.id.slice(1);
 }
 
-//Show values in console
-function showLog() {
-    console.log(username.value);
-    console.log(email.value);
-    console.log(password.value);
-    console.log(password2.value);
-}
-
 //Show error message
 function showError(field, message) {
     const formControl = field.parentElement;
@@ -73,13 +65,21 @@ function checkPasswordMatch(password, password2) {
 }
 
 //Check email format
-function checkEmail(field) {
+function checkEmailFormat(field) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(field.value.trim())) {
         showSuccess(field);
     } else {
         showError(field, 'Invalid email');
     }
+}
+
+//Check if all fields have success class
+function allFieldsAreSuccessful(fieldsArr) {
+    return fieldsArr.every(field => {
+        const formControl = field.parentElement;
+        return formControl.classList.contains('success');
+    });
 }
 
 //Event listeners
@@ -91,7 +91,10 @@ form.addEventListener('submit', (e) => {
     checkInputLength(password, 6, 25);
     checkPasswordMatch(password, password2);
     checkEmailFormat(email);
-    showLog();
-    //show popup succses
-    //cleanField(fieldsArr)
+
+    //Check if all fields are successful
+    if (allFieldsAreSuccessful(fieldsArr)) {
+        // showPopupSuccess();
+        cleanField(fieldsArr);
+    }
 });
