@@ -13,6 +13,16 @@ body {
     min-height: 80vh;
 }
 
+p {
+    font-family: 'Open sans', sans-serif;
+    color: #3498db;
+    text-align: center;
+    font-size: 17px;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    visibility: hidden;
+}
+
 .container {
     background-color: #fff;
     border-radius: 5px;
