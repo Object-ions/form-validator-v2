@@ -82,6 +82,15 @@ function allFieldsAreSuccessful(fieldsArr) {
     });
 }
 
+//Show success popup
+function showPopupSuccess() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 3000);
+}
+
 //Event listeners
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -94,7 +103,7 @@ form.addEventListener('submit', (e) => {
 
     //Check if all fields are successful
     if (allFieldsAreSuccessful(fieldsArr)) {
-        // showPopupSuccess();
+        showPopupSuccess();
         cleanField(fieldsArr);
     }
 });
