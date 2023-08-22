@@ -43,12 +43,13 @@ function showError(field, message) {
 function showSuccess(field) {
     const formControl = field.parentElement;
     formControl.className = 'form-control success';
-    cleanField(field);
 }
 
 //Clean fields after submit
-function cleanField(field) {
-    field.value = '';
+function cleanField(fieldsArr) {
+    fieldsArr.forEach(field => {
+        field.value = '';
+    });
 }
 
 //Check input length
@@ -57,7 +58,7 @@ function checkInputLength(field, min, max) {
         message = `${getFieldName(field)} must be between ${min} and ${max} characters long`;
         showError(field, message);
     } else {
-        showSuccess();
+        showSuccess(field);
     }
 }
 
@@ -65,10 +66,11 @@ function checkInputLength(field, min, max) {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    showLog();
     checkRequiredField(fieldsArr);
     checkInputLength(username, 3, 15);
-    // checkPasswordMatch(password, password2);
     // checkInputLength(password, 6, 25);
+    // checkPasswordMatch(password, password2);
     // checkEmailFormat(email);
+    showLog();
+    cleanField(fieldsArr)
 });
