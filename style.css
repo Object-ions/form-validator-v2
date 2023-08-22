@@ -20,7 +20,14 @@ p {
     font-size: 17px;
     text-transform: capitalize;
     margin-bottom: 0;
+    opacity: 0;
     visibility: hidden;
+    transition: opacity 0s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+p.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .container {
