@@ -41,6 +41,7 @@ function showSuccess(field) {
 function cleanField(fieldsArr) {
     fieldsArr.forEach(field => {
         field.value = '';
+        field.parentElement.classList.remove('success', 'error');
     });
 }
 
@@ -105,6 +106,6 @@ form.addEventListener('submit', (e) => {
     //Check if all fields are successful
     if (allFieldsAreSuccessful(fieldsArr)) {
         showPopupSuccess();
-        cleanField(fieldsArr);
+        setTimeout(() => cleanField(fieldsArr), 1000);
     }
 });
