@@ -62,14 +62,23 @@ function checkInputLength(field, min, max) {
     }
 }
 
+// //Check password match
+function checkPasswordMatch(password, password2) {
+    if (password.value !== password2.value || password.value === '') {
+        showError(password2, 'Passwords do not match');
+    } else {
+        showSuccess(password2);
+    }
+}
+
 //Event listeners
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     checkRequiredField(fieldsArr);
     checkInputLength(username, 3, 15);
-    // checkInputLength(password, 6, 25);
-    // checkPasswordMatch(password, password2);
+    checkInputLength(password, 6, 25);
+    checkPasswordMatch(password, password2);
     // checkEmailFormat(email);
     showLog();
     cleanField(fieldsArr)
